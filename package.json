@@ -13,11 +13,11 @@
   ],
   "homepage": "https://spectry.io",
   "bugs": {
-    "url": "https://github.com/spectry/spectry-code-libraries/issues"
+    "url": "https://github.com/spectry-io/spectry/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spectry/spectry-code-libraries.git",
+    "url": "git+https://github.com/spectry-io/spectry.git",
     "directory": "node"
   },
   "license": "MIT",
