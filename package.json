@@ -1,0 +1,68 @@
+{
+  "name": "@spectry/spectry",
+  "version": "0.1.0",
+  "description": "Official Spectry SDK for Node.js — feature flags, A/B test assignment and server-side event tracking.",
+  "keywords": [
+    "spectry",
+    "feature-flags",
+    "feature-toggles",
+    "ab-testing",
+    "experiments",
+    "analytics",
+    "node"
+  ],
+  "homepage": "https://spectry.io",
+  "bugs": {
+    "url": "https://github.com/spectry/spectry-code-libraries/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spectry/spectry-code-libraries.git",
+    "directory": "node"
+  },
+  "license": "MIT",
+  "author": "Spectry",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:pkg",
+    "build:esm": "tsc -p tsconfig.build.json --outDir dist/esm --module es2022 --moduleResolution bundler",
+    "build:cjs": "tsc -p tsconfig.build.json --outDir dist/cjs --module commonjs --moduleResolution node --verbatimModuleSyntax false",
+    "build:pkg": "node scripts/write-dist-package-json.mjs",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:coverage": "npm test -- --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.4",
+    "typescript": "^5.4.5"
+  }
+}

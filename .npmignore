@@ -1,0 +1,8 @@
+# `files` in package.json is the allowlist; this covers anything it lets through.
+src/
+test/
+scripts/
+coverage/
+tsconfig*.json
+jest.config.js
+*.tgz
