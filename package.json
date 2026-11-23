@@ -1,6 +1,6 @@
 {
   "name": "@spectry/spectry",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Official Spectry SDK for Node.js — feature flags, A/B test assignment and server-side event tracking.",
   "keywords": [
     "spectry",

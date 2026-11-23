@@ -160,7 +160,14 @@ const assignment = req.spectry.getVariation("<experiment-id>");
 req.spectry.getExperiments(); // every experiment this user is in
 ```
 
-Assignment matches the browser SDK exactly, so a user bucketed server-side sees the same variant client-side.
+Assignment uses the same hash, inputs and weights as the browser SDK (pinned by 1,000 shared vectors in `test/fixtures/experiment-bucketing.json`), so a user bucketed server-side sees the same variant client-side — **provided both sides bucket on the same id**. Pass the browser's id as `visitorId`: read it on the page with `Spectry.getVisitorId()` and send it to your server (a cookie or a request header you set). The browser only has a persistent id once the visitor has granted analytics consent; before that it buckets on a per-session seed, and browser/server consistency is not possible for that visitor.
+
+```js
+const spectry = client.createScopedInstance({
+  visitorId: req.cookies.spectry_visitor_id, // the value of Spectry.getVisitorId()
+  attributes: { id: user?.id },
+});
+```
 
 `null` means the user is **not in the experiment** — they fell outside the traffic allocation or missed its targeting. That is not the same as being in the control group; do not count it as one.
 
